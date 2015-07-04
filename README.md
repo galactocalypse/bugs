@@ -1,3 +1,1 @@
-# sails-with-swig
-
-a [Sails](http://sailsjs.org) application
+Blank Sails project with Swig as template engine
