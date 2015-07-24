@@ -1,4 +1,5 @@
 module.exports = {
+
 	create: function(req, res, next) {
 		var bug = {
 			application: req.param('application'),

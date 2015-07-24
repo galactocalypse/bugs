@@ -48,6 +48,6 @@ module.exports.routes = {
   'get  /:application/:page?'             : 'BugController.find',
   'post /:application/bug/create'         : 'BugController.create',
   'get  /:application/bug/resolve/:bugid' : 'BugController.resolve',
-  'get  /:application/bug/reopen/:bugid'  : 'BugController.reopen'
+  'get  /:application/bug/reopen/:bugid'  : 'BugController.reopen',
 
 };
