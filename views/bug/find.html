@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bugs</title>
+</head>
+<body >
+	<div style="float:left;width:60%;display:inline-block">
+		<table>
+			<thead>
+			<tr >
+				<th style="border:solid 1px black">Serial</th>	
+				<th style="border:solid 1px black">Title</th>	
+				<th style="border:solid 1px black">Description</th>
+				<th style="border:solid 1px black">Status</th>
+				<th style="border:solid 1px black">Actions</th>
+			</tr>
+			</thead>
+			{% for b in bugs %}
+			<tr style="{% if b.status==='resolved' %}background:#ddd;color:#888;{% endif%}">
+				<td style="border:solid 1px black">{{ loop.index }}</td>
+				<td style="border:solid 1px black">{{ b.title }}</td>
+				<td style="border:solid 1px black">{{ b.description }}</td>
+				<td style="border:solid 1px black">{{ b.status }}</td>
+				<td style="border:solid 1px black">
+					{% if b.status === 'resolved' %}
+						<a href="/{{ application }}/bug/reopen/{{ b.id }}">Reopen</a>
+					{% else %}
+						<a href="/{{ application }}/bugs/resolve/{{ b.id }}">Resolve</a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<div style="">
+		<a href="/{{ application }}/{{ page-1 || 1 }}">Previous</a> | 
+		<a href="/{{ application }}/{{ 1+page }}">Next</a>
+		</div>
+	</div>
+	<div style="width:39%;display:inline-block">
+		<form action="/{{ application }}/bug/create" method="post">
+			<label>Title</label>
+			<input type="text" name="title" style="display:block;width:90%">
+			<label>Description</label>
+			<textarea name="description" style="display:block;width:90%"></textarea>
+			<br/>
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+</body>
+</html>

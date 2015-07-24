@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +45,9 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  'get  /:application/:page?'             : 'BugController.find',
+  'post /:application/bug/create'         : 'BugController.create',
+  'get  /:application/bug/resolve/:bugid' : 'BugController.resolve',
+  'get  /:application/bug/reopen/:bugid'  : 'BugController.reopen'
 
 };
