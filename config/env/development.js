@@ -22,6 +22,7 @@ module.exports = {
   // }
   models: {
   	connection: 'localMongoServer'
-  }
+  },
+  port: 9998
 
 };
