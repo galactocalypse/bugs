@@ -11,7 +11,8 @@
 				<th style="border:solid 1px black">Serial</th>	
 				<th style="border:solid 1px black">Title</th>	
 				<th style="border:solid 1px black">Description</th>
-				<th style="border:solid 1px black">Status</th>
+				<th style="border:solid 1px black">Added</th>
+				<th style="border:solid 1px black">Updated</th>
 				<th style="border:solid 1px black">Actions</th>
 			</tr>
 			</thead>
@@ -20,7 +21,8 @@
 				<td style="border:solid 1px black">{{ loop.index }}</td>
 				<td style="border:solid 1px black">{{ b.title }}</td>
 				<td style="border:solid 1px black">{{ b.description }}</td>
-				<td style="border:solid 1px black">{{ b.status }}</td>
+				<td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td>
+				<td style="border:solid 1px black">{{ b.updatedAt|date('d-m-y H:i:s') }}</td>
 				<td style="border:solid 1px black">
 					{% if b.status === 'resolved' %}
 						<a href="/{{ application }}/bug/reopen/{{ b.id }}">Reopen</a>
