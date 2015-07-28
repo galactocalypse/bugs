@@ -24,10 +24,14 @@
 				<td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td>
 				<td style="border:solid 1px black">{{ b.updatedAt|date('d-m-y H:i:s') }}</td>
 				<td style="border:solid 1px black">
-					{% if b.status === 'resolved' %}
+					{% if b.status !== 'resolved' %}
 						<a href="/{{ application }}/bug/reopen/{{ b.id }}">Reopen</a>
-					{% else %}
+					{% endif %}
+					{% if b.status !== 'resolved' %}
 						<a href="/{{ application }}/bug/resolve/{{ b.id }}">Resolve</a>
+					{% endif %}
+					{% if b.status !== 'removed' %}
+						<a href="/{{ application }}/bug/remove/{{ b.id }}">Remove</a>
 					{% endif %}
 				</td>
 			</tr>

@@ -49,5 +49,6 @@ module.exports.routes = {
   'post /:application/bug/create'         : 'BugController.create',
   'get  /:application/bug/resolve/:bugid' : 'BugController.resolve',
   'get  /:application/bug/reopen/:bugid'  : 'BugController.reopen',
+  'get  /:application/bug/remove/:bugid'  : 'BugController.remove',
 
 };
