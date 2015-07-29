@@ -24,11 +24,12 @@
 				<td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td>
 				<td style="border:solid 1px black">{{ b.updatedAt|date('d-m-y H:i:s') }}</td>
 				<td style="border:solid 1px black">
-					{% if b.status !== 'resolved' %}
+					{% if b.status !== 'unresolved' %}
 						<a href="/{{ application }}/bug/reopen/{{ b.id }}">Reopen</a>
 					{% endif %}
 					{% if b.status !== 'resolved' %}
 						<a href="/{{ application }}/bug/resolve/{{ b.id }}">Resolve</a>
+						<a href="#" onclick="edit(this, '{{ b.id }}')">Edit</a>
 					{% endif %}
 					{% if b.status !== 'removed' %}
 						<a href="/{{ application }}/bug/remove/{{ b.id }}">Remove</a>
@@ -49,8 +50,25 @@
 			<label>Description</label>
 			<textarea name="description" style="display:block;width:90%"></textarea>
 			<br/>
-			<input type="submit" value="Submit">
+			<input type="submit" value="Create">
+		</form>
+		<form action="/{{ application }}/bug/update" id="editForm" method="post">
+			<input type="hidden" name="id" value="">
+			<label>Title</label>
+			<input type="text" name="title" style="display:block;width:90%">
+			<label>Description</label>
+			<textarea name="description" style="display:block;width:90%"></textarea>
+			<br/>
+			<input type="submit" value="Save">
 		</form>
 	</div>
+	<script type="text/javascript">
+	function edit(thisArg, id){
+		var form = document.getElementById('editForm');
+		form['id'].value = id;
+		form['title'].value = thisArg.parentNode.parentNode.children[1].textContent;
+		form['description'].value = thisArg.parentNode.parentNode.children[2].textContent;
+	}
+	</script>
 </body>
 </html>

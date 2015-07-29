@@ -12,6 +12,19 @@ module.exports = {
 			return res.redirect(req.header('Referer'));
 		});
 	},
+	update: function(req, res, next) {
+		var bug = {
+			id: req.param('id'),
+			application: req.param('application'),
+			title: req.param('title'),
+			description: req.param('description') || req.param('title'),
+			status: 'unresolved'
+		};
+		Bug.update({id: bug.id }, bug, function(err, bug){
+			if (err) return next(err);
+			return res.redirect(req.header('Referer'));
+		});
+	},
 	resolve: function(req, res, next) {
 		var bugid = req.param('bugid');
 		var app = req.param('application');
