@@ -5,7 +5,9 @@ module.exports = {
 			application: req.param('application'),
 			title: req.param('title'),
 			description: req.param('description') || req.param('title'),
-			status: 'unresolved'
+			status: 'unresolved',
+			type: req.param('type') || 'BUG',
+			context: req.param('context') || req.param('application')
 		};
 		Bug.create(bug, function(err, bug){
 			if (err) return next(err);
@@ -18,7 +20,9 @@ module.exports = {
 			application: req.param('application'),
 			title: req.param('title'),
 			description: req.param('description') || req.param('title'),
-			status: 'unresolved'
+			status: 'unresolved',
+			type: req.param('type') || 'BUG',
+			context: req.param('context') || req.param('application')
 		};
 		Bug.update({id: bug.id }, bug, function(err, bug){
 			if (err) return next(err);

@@ -3,6 +3,12 @@ module.exports = {
 		application: {
 			type: 'string'
 		},
+		context: {
+			type: 'string'
+		},
+		type: {
+			type: 'string'
+		},
 		title: {
 			type: 'string'
 		},

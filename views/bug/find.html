@@ -4,11 +4,13 @@
 	<title>Bugs</title>
 </head>
 <body >
-	<div style="float:left;width:60%;display:inline-block">
+	<div style="float:left;width:70%;display:inline-block">
 		<table>
 			<thead>
 			<tr >
-				<th style="border:solid 1px black">Serial</th>	
+				<th style="border:solid 1px black">Serial</th>
+				<th style="border:solid 1px black">Type</th>
+				<th style="border:solid 1px black">Context</th>
 				<th style="border:solid 1px black">Title</th>	
 				<th style="border:solid 1px black">Description</th>
 				<th style="border:solid 1px black">Added</th>
@@ -19,6 +21,8 @@
 			{% for b in bugs %}
 			<tr style="{% if b.status==='resolved' %}background:#ddd;color:#888;{% endif%}">
 				<td style="border:solid 1px black">{{ loop.index }}</td>
+				<td style="border:solid 1px black">{{ b.type }}</td>
+				<td style="border:solid 1px black">{{ b.context }}</td>
 				<td style="border:solid 1px black">{{ b.title }}</td>
 				<td style="border:solid 1px black">{{ b.description }}</td>
 				<td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td>
@@ -43,8 +47,18 @@
 		<a href="/{{ application }}/{{ 1+page }}">Next</a>
 		</div>
 	</div>
-	<div style="width:39%;display:inline-block">
+	<div style="width:29%;display:inline-block">
 		<form action="/{{ application }}/bug/create" method="post">
+			<label>Type</label><br/>
+			<select name="type">
+				<option value="FEATURE">Feature</option>
+				<option value="BUG">Bug</option>
+				<option value="ENHANCEMENT">Enhancement</option>
+			</select>
+			<br/>
+			<label>Context</label><br/>
+			<input type="text" name="context">
+			<br/>
 			<label>Title</label>
 			<input type="text" name="title" style="display:block;width:90%">
 			<label>Description</label>
@@ -54,6 +68,16 @@
 		</form>
 		<form action="/{{ application }}/bug/update" id="editForm" method="post">
 			<input type="hidden" name="id" value="">
+			<label>Type</label><br/>
+			<select name="type">
+				<option value="FEATURE">Feature</option>
+				<option value="BUG">Bug</option>
+				<option value="ENHANCEMENT">Enhancement</option>
+			</select>
+			<br/>
+			<label>Context</label><br/>
+			<input type="text" name="context">
+			<br/>
 			<label>Title</label>
 			<input type="text" name="title" style="display:block;width:90%">
 			<label>Description</label>
@@ -65,9 +89,12 @@
 	<script type="text/javascript">
 	function edit(thisArg, id){
 		var form = document.getElementById('editForm');
+		var gP = thisArg.parentNode.parentNode;
 		form['id'].value = id;
-		form['title'].value = thisArg.parentNode.parentNode.children[1].textContent;
-		form['description'].value = thisArg.parentNode.parentNode.children[2].textContent;
+		form['title'].value = gP.children[3].textContent;
+		form['description'].value = gP.children[4].textContent;
+		form['context'].value = gP.children[2].textContent;
+		form['type'].value = gP.children[1].textContent;
 	}
 	</script>
 </body>
