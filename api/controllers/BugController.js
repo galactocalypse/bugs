@@ -56,10 +56,15 @@ module.exports = {
 	find: function(req, res, next) {
 		var page = req.param('page') || 1;
 		var limit = req.param('limit') || 20;
-		var status = req.param('status') || ['resolved', 'unresolved'];
+		var q = {};
+		q.status = req.param('status') || ['resolved', 'unresolved'];
 		var app = req.param('application');
-
-		Bug.find({ application: app, status: status }).sort({ status: -1, createdAt: -1 }).paginate({ page: page, limit : limit }).exec(function(err, bugs){
+		var type = req.param('type');
+		var context = req.param('context');
+		if (app) q.application = app;
+		if (type) q.type = type;
+		if (context) q.context = context;
+		Bug.find(q).sort({ status: -1, createdAt: -1 }).paginate({ page: page, limit : limit }).exec(function(err, bugs){
 			if (err) return next(err);
 			return res.view( { application: app, bugs: bugs, page: isNaN(page)?1:parseInt(page) });
 		})
