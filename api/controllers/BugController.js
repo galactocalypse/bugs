@@ -71,6 +71,6 @@ module.exports = {
 		Bug.find(q).sort({ status: -1, createdAt: -1 }).paginate({ page: page, limit : limit }).exec(function(err, bugs){
 			if (err) return next(err);
 			return res.view( { application: app, bugs: bugs, page: isNaN(page)?1:parseInt(page) });
-		})
+		});
 	}
 };
