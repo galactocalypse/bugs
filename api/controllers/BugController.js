@@ -1,5 +1,13 @@
 module.exports = {
-
+	homepage: function(req, res, next) {
+		Bug.native(function(err, collection){
+			if (err) return next(err);
+			collection.distinct('application', function(err, apps){
+				if (err) return next(err);
+				return res.view('homepage', { applications: apps })
+			});
+		});
+	},
 	create: function(req, res, next) {
 		var bug = {
 			application: req.param('application'),

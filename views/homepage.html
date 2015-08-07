@@ -5,10 +5,12 @@
 </head>
 <body>
 	Bright sunny day, eh?<br/>
-
-	<a href="/mart">Mart</a>
-	<br/>
-	<a href="/scoobla">Scoobla</a>
-	<br/>
+	{% if applications %}
+		{% for a in applications %}
+			<a href="/{{ a }}">{{ a }}</a><br/>
+		{% endfor %}
+	{% else %}
+		You haven't listed any applications yet.
+	{% endif %}
 </body>
 </html>
