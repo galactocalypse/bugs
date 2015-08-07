@@ -54,7 +54,7 @@
 				<tr>
 					<td><label>Status</label></td>
 					<td>
-						<select name="status">
+						<select multiple name="status">
 							<option value="">All</option>
 							<option value="unresolved">Open</option>
 							<option value="resolved">Resolved</option>
@@ -64,7 +64,7 @@
 				</tr>				<tr>
 					<td><label>Type</label></td>
 					<td>
-						<select name="type">
+						<select multiple name="type">
 							<option value="">All</option>
 							<option value="FEATURE">Feature</option>
 							<option value="BUG">Bug</option>
@@ -87,7 +87,7 @@
 			</table>
 			<input type="submit" value="Filter">
 		</form>
-		<h3>Create/Update</h3>
+		<h3>Create</h3>
 		<form action="/{{ application }}/bug/create" method="post">
 			<table>
 				<tr>
