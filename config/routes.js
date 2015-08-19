@@ -43,7 +43,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'get  /:application/:page?'             : 'BugController.find',
+  'get  /find/:application/:page?'        : 'BugController.find',
   'post /:application/bug/create'         : 'BugController.create',
   'post /:application/bug/update'         : 'BugController.update',
   'get  /:application/bug/resolve/:bugid' : 'BugController.resolve',

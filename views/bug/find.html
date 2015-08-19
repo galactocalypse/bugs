@@ -2,55 +2,59 @@
 <html>
 <head>
 	<title>Bugs</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
-<body >
-	<div style="float:left;width:70%;display:inline-block">
-		<table>
+<body>
+	<div class="container-fluid col-md-9">
+		<table class="table">
 			<thead>
 			<tr >
-				<th style="border:solid 1px black">Serial</th>
+				<th style="border:solid 1px black">Sl</th>
 				<th style="border:solid 1px black">Type</th>
 				<th style="border:solid 1px black">Context</th>
 				<th style="border:solid 1px black">Title</th>	
 				<th style="border:solid 1px black">Description</th>
-				<th style="border:solid 1px black">Added</th>
-				<th style="border:solid 1px black">Updated</th>
+				<!--th style="border:solid 1px black">Added</th-->
+				<!--th style="border:solid 1px black">Updated</th-->
 				<th style="border:solid 1px black">Actions</th>
 			</tr>
 			</thead>
 			{% for b in bugs %}
 			<tr style="{% if b.status==='resolved' %}background:#ddd;color:#888;{% endif%}">
 				<td style="border:solid 1px black">{{ loop.index }}</td>
-				<td style="border:solid 1px black">{{ b.type }}</td>
+				<td style="border:solid 1px black">{{ b.type[0] }}</td>
 				<td style="border:solid 1px black">{{ b.context }}</td>
 				<td style="border:solid 1px black">{{ b.title }}</td>
 				<td style="border:solid 1px black">{{ b.description }}</td>
-				<td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td>
-				<td style="border:solid 1px black">{{ b.updatedAt|date('d-m-y H:i:s') }}</td>
+				<!--td style="border:solid 1px black">{{ b.createdAt|date('d-m-y H:i:s') }}</td-->
+				<!--td style="border:solid 1px black">{{ b.updatedAt|date('d-m-y H:i:s') }}</td-->
 				<td style="border:solid 1px black">
 					{% if b.status !== 'unresolved' %}
-						<a href="/{{ application }}/bug/reopen/{{ b.id }}">Reopen</a>
+						<a href="/{{ application }}/bug/reopen/{{ b.id }}">reopen</a>
 					{% endif %}
 					{% if b.status !== 'resolved' %}
-						<a href="/{{ application }}/bug/resolve/{{ b.id }}">Resolve</a>
-						<a href="#" onclick="edit(this, '{{ b.id }}')">Edit</a>
+						<a href="/{{ application }}/bug/resolve/{{ b.id }}">resolve</a>
+						<a href="#" onclick="edit(this, '{{ b.id }}')">edit</a>
 					{% endif %}
 					{% if b.status !== 'removed' %}
-						<a href="/{{ application }}/bug/remove/{{ b.id }}">Remove</a>
+						<a href="/{{ application }}/bug/remove/{{ b.id }}">remove</a>
 					{% endif %}
 				</td>
 			</tr>
 			{% endfor %}
 		</table>
 		<div style="">
-		<a href="/{{ application }}/{{ page-1 || 1 }}">Previous</a> | 
-		<a href="/{{ application }}/{{ 1+page }}">Next</a>
+		<a href="/find/{{ application }}/{{ page-1 || 1 }}">Previous</a> | 
+		<a href="/find/{{ application }}/{{ 1+page }}">Next</a>
 		</div>
 	</div>
-	<div style="width:29%;display:inline-block">
+	<div class="container-fluid col-md-3">
 		<h3>Filters</h3>
-		<form action="/scoobla">
-			<table>
+		<form action="/find/{{ application }}">
+			<table class="">
 				<tr>
 					<td><label>Status</label></td>
 					<td><label>Type</label></td>
@@ -147,6 +151,7 @@
 			<input type="submit" value="Save">
 		</form>
 	</div>
+
 	<script type="text/javascript">
 	function edit(thisArg, id){
 		var form = document.getElementById('editForm');
